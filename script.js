@@ -1,14 +1,34 @@
 const parseCode = (str) => {
   // your code here
+	let decodedObj = {
+        firstName: "",
+        lastName: "", 
+        id: ""
+    };
 
-  const [firstName, lastName, id] = str.split("000");
+    let objPropArray = ["firstName", "lastName", "id"];
+    let propIndex = 0;
 
-  // Return an object with firstName, lastName, and id
-  return {
-    firstName: firstName,
-    lastName: lastName,
-    id: id,
-  };
+    let i = 0;
+    while(i < str.length)
+        {if(str.charAt(i) == '0') {
+            i++;
+        }
+        else{
+            let nextZero = str.indexOf('0', i);
+            let value;
+            if(nextZero == -1)
+                {value = str.slice(i);
+                    i = str.length;
+                }
+            else
+                {value = str.slice(i, nextZero);
+                    i = nextZero;
+                } 
+            
+            decodedObj[objPropArray[propIndex++]] = value;  
+		}}
+	return decodedObj;
 };
 
 // Do not change the code below
